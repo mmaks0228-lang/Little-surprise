@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f6edf4">
+<title>Маленький сюрприз</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px 14px;
+  color:#17151b;
+  background:
+    radial-gradient(circle at 15% 10%,rgba(255,196,220,.85),transparent 34%),
+    radial-gradient(circle at 90% 80%,rgba(193,211,255,.75),transparent 36%),
+    linear-gradient(135deg,#fff4f9 0%,#f3f1ff 100%);
+}
+.card{
+  width:min(430px,100%);
+  min-height:650px;
+  padding:18px;
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:32px;
+  background:rgba(255,255,255,.84);
+  box-shadow:0 24px 70px rgba(64,38,67,.18);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  display:flex;
+  flex-direction:column;
+}
+.progress{display:flex;gap:6px;margin:2px 4px 16px}
+.dot{height:5px;flex:1;border-radius:99px;background:#eadfe8;transition:.35s}
+.dot.active{background:#1b1920}
+.screen{display:none;flex:1;flex-direction:column;animation:in .42s ease}
+.screen.active{display:flex}
+@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.hero{
+  height:190px;border-radius:25px;display:flex;align-items:center;justify-content:center;
+  font-size:82px;margin-bottom:22px;
+  background:linear-gradient(135deg,#f6d8e8,#e7e8fb);
+}
+.kicker{text-align:center;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.52;margin-bottom:10px}
+h1{font-size:31px;line-height:1.06;text-align:center;margin:0 0 14px;font-weight:850;letter-spacing:-.03em}
+p{font-size:18px;line-height:1.45;text-align:center;margin:0 auto 22px;max-width:360px}
+.small{font-size:15px;opacity:.58}
+.buttons{margin-top:auto;display:grid;gap:10px}
+button{
+  width:100%;border:0;border-radius:18px;padding:17px 16px;
+  font:inherit;font-size:17px;font-weight:750;cursor:pointer;
+  transition:transform .15s,box-shadow .15s,background .15s;
+}
+button:active{transform:scale(.98)}
+.primary{background:#18161c;color:white;box-shadow:0 10px 24px rgba(24,22,28,.18)}
+.secondary{background:#f0e9ef;color:#18161c}
+.choice{background:#f5eff4;text-align:left;padding:16px 17px}
+.choice strong{display:block;font-size:17px;margin-bottom:3px}
+.choice span{display:block;font-size:14px;font-weight:500;opacity:.58;line-height:1.35}
+.badge{
+  display:inline-flex;align-self:center;padding:8px 12px;border-radius:99px;
+  background:#f0e6ef;font-size:13px;font-weight:750;margin-bottom:13px;
+}
+.note{
+  padding:15px 16px;border-radius:20px;background:#faf6f9;
+  font-size:15px;line-height:1.4;margin-bottom:16px;
+}
+.final{
+  min-height:240px;border-radius:25px;padding:26px 18px;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  background:linear-gradient(135deg,#efe0eb,#e5e9fb);
+  text-align:center;margin-bottom:20px;
+}
+.final .emoji{font-size:62px;margin-bottom:12px}
+.final h1{margin-bottom:8px}
+@media(max-height:720px){.card{min-height:590px}.hero{height:150px;font-size:68px}}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="progress" aria-hidden="true">
+    <i class="dot active"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i>
+  </div>
+
+  <section class="screen active" id="s1">
+    <div class="hero">☕🌆</div>
+    <div class="kicker">маленький сюрприз</div>
+    <h1>Лиз, у меня тут возникла одна идея…</h1>
+    <p>Но прежде чем продолжишь, тебе придётся пройти маленький тест 😏</p>
+    <div class="buttons">
+      <button class="primary" onclick="go(2)">Ну давай, удивляй 😁</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s2">
+    <div class="hero">👀</div>
+    <div class="kicker">вопрос №1</div>
+    <h1>Как думаешь, что происходит, когда два человека слишком долго общаются, но ни разу нормально не выбирались куда-нибудь?</h1>
+    <div class="buttons">
+      <button class="choice" onclick="go(3)"><strong>Ничего 🤷‍♀️</strong><span>Всё абсолютно под контролем.</span></button>
+      <button class="choice" onclick="go(3)"><strong>Это подозрительно 👀</strong><span>Кажется, пора что-то менять.</span></button>
+      <button class="choice" onclick="go(3)"><strong>Пора это исправлять 😏</strong><span>Наконец-то хоть кто-то сказал это вслух.</span></button>
+    </div>
+  </section>
+
+  <section class="screen" id="s3">
+    <div class="hero">😂✨</div>
+    <div class="kicker">объективная реальность</div>
+    <h1>Работа? ❌<br>Караоке? ❌<br>Охрана? ❌</h1>
+    <p>Кажется, нам нужен вариант, где никто никого не обвиняет в разбитых стопках 😂</p>
+    <div class="note">А ещё вариант «случайно встретились на смене» уже был. Проверено лично 😁</div>
+    <div class="buttons">
+      <button class="primary" onclick="go(4)">Продолжай 👀</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s4">
+    <div class="hero">🌙☕</div>
+    <div class="kicker">собственно, зачем всё это</div>
+    <h1>Предлагаю наконец-то выбраться вдвоём</h1>
+    <p>Без работы, караоке, охраны и прочего рабочего хаоса 😁<br>Просто нормально провести время.</p>
+    <div class="buttons">
+      <button class="primary" onclick="go(5)">Ну давай 😁</button>
+      <button class="secondary" onclick="go(6)">Я подумаю 🤔</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s5">
+    <div class="hero">🥂</div>
+    <div class="kicker">вот это уже конструктивный разговор</div>
+    <h1>Тогда осталась одна маленькая деталь 😏</h1>
+    <p>Какой формат тебе ближе?</p>
+    <div class="buttons">
+      <button class="choice" onclick="pick('Спокойный вечер')"><strong>☕ Спокойный вечер</strong><span>Без суеты — поговорить, посмеяться и нормально провести время.</span></button>
+      <button class="choice" onclick="pick('Прогулка + что-нибудь вкусное')"><strong>🌆 Прогулка + что-нибудь вкусное</strong><span>Пройтись, что-нибудь найти по пути и никуда не торопиться.</span></button>
+      <button class="choice" onclick="pick('Выбирай — у меня уже есть две интересные идеи')"><strong>🎲 Выбирай</strong><span>У меня уже есть две интересные идеи 👀</span></button>
+    </div>
+  </section>
+
+  <section class="screen" id="s6">
+    <div class="hero">😌</div>
+    <div class="kicker">дипломатический манёвр принят</div>
+    <h1>Хорошо, я человек терпеливый 😌</h1>
+    <p>Но предупреждаю: приглашение уже существует, а значит пути назад практически нет 😂</p>
+    <div class="buttons">
+      <button class="primary" onclick="go(5)">Ладно, уговорил 😁</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s7">
+    <div class="final">
+      <div class="emoji">👀</div>
+      <h1>Окей, тогда оставляю это за собой 😏</h1>
+      <p class="small">У меня уже есть две интересные идеи.<br>Какая именно — узнаешь, когда увидимся.</p>
+    </div>
+    <div class="buttons">
+      <button class="primary" onclick="go(8)">Вот теперь мне интересно 😁</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s8">
+    <div class="hero">📅✨</div>
+    <div class="kicker">финальный вопрос</div>
+    <h1>Осталось выбрать день</h1>
+    <p>А дальше уже без интерактивок — вживую 😏</p>
+    <div class="buttons">
+      <button class="choice" onclick="finish('Четверг')"><strong>Четверг</strong><span>Есть настроение на маленькое приключение.</span></button>
+      <button class="choice" onclick="finish('Пятница')"><strong>Пятница</strong><span>Начинаем выходные правильно.</span></button>
+      <button class="choice" onclick="finish('Суббота')"><strong>Суббота</strong><span>Можно никуда не спешить.</span></button>
+      <button class="choice" onclick="finish('Выбирай сам')"><strong>🎲 Выбирай сам</strong><span>Доверяю тебе.</span></button>
+    </div>
+  </section>
+
+  <section class="screen" id="s9">
+    <div class="final">
+      <div class="emoji">🤝❤️</div>
+      <h1>Договорились 😎</h1>
+      <p class="small" id="result"></p>
+    </div>
+    <div class="buttons">
+      <button class="primary" onclick="go(1)">Начать сначала 🔄</button>
+    </div>
+  </section>
+</main>
+
+<script>
+let current=1;
+const totalDots=6;
+function updateProgress(n){
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i<Math.min(n,totalDots)));
+}
+function go(n){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const el=document.getElementById('s'+n);
+  if(el) el.classList.add('active');
+  current=n;
+  updateProgress(n);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function pick(value){
+  if(value.startsWith('Выбирай')){
+    go(7);
+  }else{
+    document.getElementById('result').textContent='Формат выбран: '+value+'. Теперь осталось только договориться о дне 😏';
+    go(9);
+  }
+}
+function finish(day){
+  document.getElementById('result').textContent='Выбрано: '+day+'. Всё, дальше уже встречаемся в реальности 😁';
+  go(9);
+}
+</script>
+</body>
+</html>
